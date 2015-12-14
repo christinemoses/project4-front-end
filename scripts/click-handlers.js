@@ -2,8 +2,8 @@
 
 $(document).ready(function() {
 
-    // page is now ready, initialize the calendar...
 
+    // calendar functionality & features
     $('#calendar').fullCalendar({
       header: {
         left: 'prev,next today',
