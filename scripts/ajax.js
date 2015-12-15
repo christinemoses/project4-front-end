@@ -3,6 +3,7 @@
 var taskTracker_api = {
   url: 'http://localhost:3000',
   token: null,
+  userId: null,
 
   ajax: function(config, cb) {
     if(this.token !== null){
@@ -11,9 +12,15 @@ var taskTracker_api = {
           Authorization: 'Token token=' + this.token
         }
       };
-
       config = $.extend({}, config, headers);
     }
+
+    var setData = {
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json'
+    };
+    config = $.extend({}, config, setData);
+
     $.ajax(config).done(function(data, textStatus, jqxhr) {
       cb(null, data);
     }).fail(function(jqxhr, status, error) {
@@ -21,90 +28,76 @@ var taskTracker_api = {
     });
   },
 
-  register: function register(credentials, callback) {
+  register: function (credentials, callback) {
     this.ajax({
       method: 'POST',
-      url: this.svr + '/register',
-      contentType: 'application/json; charset=utf-8',
-      data: JSON.stringify(credentials),
-      dataType: 'json'
+      url: this.url + '/register',
+      data: JSON.stringify(credentials)
     }, callback);
   },
 
-  login: function login(credentials, callback) {
+  login: function (credentials, callback) {
     this.ajax({
       method: 'POST',
-      url: this.svr + '/login',
-      contentType: 'application/json; charset=utf-8',
-      data: JSON.stringify(credentials),
-      dataType: 'json'
+      url: this.url + '/login',
+      data: JSON.stringify(credentials)
     }, callback);
   },
 
-  logout: function logout(callback) {
+  logout: function (callback) {
     this.ajax({
-      method: 'POST',
-      url: this.svr + '/logout',
-      contentType: 'application/json; charset=utf-8',
-      data: JSON.stringify(credentials),
-      dataType: 'json'
+      method: 'DELETE',
+      url: this.url + '/logout/' + this.userId
     }, callback);
   },
 
   //Authenticated api actions
 
-  createEvent: function (callback, name) {
+  createEvent: function (callback, name, location, date) {
     this.ajax({
       method: 'POST',
-      url: this.svr + '/eventss',
-      contentType: 'application/json; charset=utf-8',
-      data: JSON.stringify({"event": {"name":name, "location":location, "date":date}}),
-      dataType: 'json'
+      url: this.url + '/events',
+      data: JSON.stringify({"event": {"name":name, "location":location, "date":date}})
     }, callback);
   },
 
   listEvents: function (callback) {
     this.ajax({
       method: 'GET',
-      url: this.svr + '/events',
-      dataType: 'json'
+      url: this.url + '/events'
     }, callback);
   },
 
-  deleteEvent: function (callback, name) {
+//updateEvent
+
+  deleteEvent: function (callback, eventId) {
     this.ajax({
       method: 'DELETE',
-      url: this.svr + '/events',
-      contentType: 'application/json; charset=utf-8',
-      data: JSON.stringify({"event": {"name":name, "location":location, "date":date}}),
-      dataType: 'json'
+      url: this.url + '/events/' + eventId,
     }, callback);
   },
 
-  createTasks: function (callback, eventId, name) {
+  createTask: function (callback, eventId, name, date) {
     this.ajax({
       method: 'POST',
-      url: this.svr + '/events/' + eventId + '/tasks',
-      contentType: 'application/json; charset=utf-8',
-      data: JSON.stringify({"task": {"name":name, "date":date}}),
-      dataType: 'json'
+      url: this.url + '/events/' + eventId + '/tasks',
+      data: JSON.stringify({"task": {"name":name, "date":date}})
     }, callback);
   },
 
   listTasks: function (callback, eventId) {
     this.ajax({
       method: 'GET',
-      url: this.svr + '/events/' + eventId + '/tasks',
-      dataType: 'json'
+      url: this.url + '/events/' + eventId + '/tasks'
     }, callback);
   },
 
-  deleteTasks: function (callback, eventID, name) {
+//updateTask
+
+  deleteTask: function (callback, eventId, taskId) {
     this.ajax({
       method: 'DELETE',
-      url: this.svr + '/events' + eventId + '/tasks',
-      contentType: 'application/json; charset=utf-8',
-      data: JSON.stringify({"event": {"name":name, "date":date}}),
-      dataType: 'json'
+      url: this.url + '/events/' + eventId + '/tasks/' + taskId,
     }, callback);
-  },
+  }
+};

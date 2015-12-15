@@ -33,42 +33,42 @@
 
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="#">Tradeshow Task Tracker</a>
-        <button type="button" class="btn btn-default navbar-btn">Task View</button>
-        <button type="button" class="btn btn-default navbar-btn">Calendar View</button>
-        <button type="button" class="btn btn-default navbar-btn navbar-right">Sign Out</button>
+        <a class="navbar-brand" href="#" id="logo">Tradeshow Task Tracker</a>
+        <button type="button" class="btn btn-default navbar-btn" id="nav-task-view">Task View</button>
+        <button type="button" class="btn btn-default navbar-btn" id="nav-cal-view">Calendar View</button>
+        <button type="button" class="btn btn-default navbar-btn navbar-right" id="nav-log-out">Sign Out</button>
       </div>
     </nav>
 
 
     <div class="jumbotron">
       <h1>Tradeshow Task Tracker</h1>
-      <p>Manage your event planning activities and due dates in one convenient place</p>
+      <p>Manage your event planning activities and deadlines in one convenient place</p>
 
       <div class="landing-page-buttons">
-        <button type="button" class="btn btn-default">Register</button>
-        <button type="button" class="btn btn-default">Log In</button>
+        <button type="button" class="btn btn-default" id="register-button">Register</button>
+        <button type="button" class="btn btn-default" id="login-button">Log In</button>
       </div>
 
       <!-- registration form -->
-      <form class="form-horizontal">
+      <form class="form-horizontal" id="reg-form">
         <h2>Register</h2>
         <div class="form-group">
-          <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+          <label for="reg-email" class="col-sm-2 control-label">Email</label>
           <div class="col-sm-10">
-            <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+            <input type="email" name="email" class="form-control" id="reg-email" placeholder="Email">
           </div>
         </div>
         <div class="form-group">
-          <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+          <label for="reg-pw" class="col-sm-2 control-label">Password</label>
           <div class="col-sm-10">
-            <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+            <input type="password" name="password" class="form-control" id="reg-pw" placeholder="Password">
           </div>
         </div>
         <div class="form-group">
-          <label for="inputPassword3" class="col-sm-2 control-label">Password Confirmation</label>
+          <label for="reg-pw-confirm" class="col-sm-2 control-label">Password Confirmation</label>
           <div class="col-sm-10">
-            <input type="password" class="form-control" id="inputPassword3" placeholder="Re-Enter Password">
+            <input type="password" name="password_confirmation" class="form-control" id="reg-pw-confirm" placeholder="Re-Enter Password">
           </div>
         </div>
         <div class="form-group">
@@ -80,18 +80,18 @@
 
       <!-- Log In form -->
 
-      <form class="form-horizontal">
+      <form class="form-horizontal" id="login-form">
         <h2>Log In</h2>
         <div class="form-group">
-          <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+          <label for="login-email" class="col-sm-2 control-label">Email</label>
           <div class="col-sm-10">
-            <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+            <input type="email" name="email" class="form-control" id="login-email" placeholder="Email">
           </div>
         </div>
         <div class="form-group">
-          <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+          <label for="login-pw" class="col-sm-2 control-label">Password</label>
           <div class="col-sm-10">
-            <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+            <input type="password" name="password" class="form-control" id="login-pw" placeholder="Password">
           </div>
         </div>
         <div class="form-group">
@@ -102,48 +102,49 @@
       </form>
 
       <!-- Event List -->
-      <h2>Your Events</h2>
-      <table class="table table-hover">
-        <tr>
-          <th>Event Name</th>
-          <th>Event Location</th>
-          <th>Event Start Date</th>
-          <th></th>
-          <th></th>
-        </tr>
-        <tr>
-          <td>GDC</td>
-          <td>San Francisco</td>
-          <td>17/03/16</td>
-          <td><button class="edit btn btn-primary">Edit</button></td>
-          <td><button class="delete btn btn-danger">Delete</button></td>
-        </tr>
-      </table>
-
+      <div id="event-view">
+        <h2>Your Events</h2>
+        <table class="table table-hover">
+          <tr>
+            <th>Event Name</th>
+            <th>Event Location</th>
+            <th>Event Start Date</th>
+            <th></th>
+            <th></th>
+          </tr>
+          <tr>
+            <td>GDC</td>
+            <td>San Francisco</td>
+            <td>17/03/16</td>
+            <td><button class="edit btn btn-primary">Edit</button></td>
+            <td><button class="delete btn btn-danger">Delete</button></td>
+          </tr>
+        </table>
+      </div>
       <!-- Add New Event Button -->
-      <button type="button" class="btn btn-default">Add a New Event</button>
+      <button type="button" class="btn btn-default" id="event-add-button">Add a New Event</button>
 
 
       <!-- Create New Event -->
 
-      <form class="form-horizontal">
+      <form class="form-horizontal" id="new-event-form">
         <h2>Create a New Event</h2>
         <div class="form-group">
-          <label for="inputEmail3" class="col-sm-2 control-label">Event Name</label>
+          <label for="new-event-name" class="col-sm-2 control-label">Event Name</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputEmail3" placeholder="Name">
+            <input type="text" name="name" class="form-control" id="new-event-name" placeholder="Name">
           </div>
         </div>
         <div class="form-group">
-          <label for="inputEmail3" class="col-sm-2 control-label">Event Location</label>
+          <label for="new-event-location" class="col-sm-2 control-label">Event Location</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputEmail3" placeholder="Location">
+            <input type="text" name="location" class="form-control" id="new-event-location" placeholder="Location">
           </div>
         </div>
         <div class="form-group">
-          <label for="inputPassword3" class="col-sm-2 control-label">Event Start Date</label>
+          <label for="new-event-start" class="col-sm-2 control-label">Event Start Date</label>
           <div class="col-sm-10">
-            <input type="date" class="form-control" id="inputPassword3" placeholder="Start Date">
+            <input type="date" name="date" class="form-control" id="new-event-start" placeholder="Start Date">
           </div>
         </div>
         <div class="form-group">
@@ -154,40 +155,41 @@
       </form>
 
       <!-- Task List -->
-      <h2>Event Tasks</h2>
-      <table class="table table-hover">
-        <tr>
-          <th>Task Description</th>
-          <th>Task Due Date</th>
-          <th></th>
-          <th></th>
-        </tr>
-        <tr>
-          <td>Order Electrical service and labor</td>
-          <td>10/03/16</td>
-          <td><button class="edit btn btn-primary">Edit</button></td>
-          <td><button class="delete btn btn-danger">Delete</button></td>
-        </tr>
-      </table>
-
+      <div id="task-view">
+        <h2>Event Tasks</h2>
+        <table class="table table-hover">
+          <tr>
+            <th>Task Description</th>
+            <th>Task Due Date</th>
+            <th></th>
+            <th></th>
+          </tr>
+          <tr>
+            <td>Order Electrical service and labor</td>
+            <td>10/03/16</td>
+            <td><button class="edit btn btn-primary">Edit</button></td>
+            <td><button class="delete btn btn-danger">Delete</button></td>
+          </tr>
+        </table>
+      </div>
 
       <!-- Add A Task -->
-      <button type="button" class="btn btn-default">Add a Task</button>
+      <button type="button" class="btn btn-default" id="task-add-button">Add a Task</button>
 
       <!-- Add a Task -->
 
-      <form class="form-horizontal">
+      <form class="form-horizontal" id="new-task-form">
         <h2>Add a Task</h2>
         <div class="form-group">
-          <label for="inputEmail3" class="col-sm-2 control-label">Task Description</label>
+          <label for="task-description" class="col-sm-2 control-label">Task Description</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputEmail3" placeholder="Description">
+            <input type="text" name="name" class="form-control" id="task-description" placeholder="Description">
           </div>
         </div>
         <div class="form-group">
-          <label for="inputPassword3" class="col-sm-2 control-label">Task Due Date</label>
+          <label for="task-date" class="col-sm-2 control-label">Task Due Date</label>
           <div class="col-sm-10">
-            <input type="date" class="form-control" id="inputPassword3" placeholder="Due Date">
+            <input type="date" name="date" class="form-control" id="task-date" placeholder="Due Date">
           </div>
         </div>
         <div class="form-group">
@@ -198,7 +200,7 @@
       </form>
 
       <!-- Calendar View -->
-      <h2>Calendar View</h2>
+      <h2>Event Calendar</h2>
       <div id='calendar'></div>
 
       <!-- Calendar Modal
