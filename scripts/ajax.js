@@ -53,11 +53,11 @@ var taskTracker_api = {
 
   //Authenticated api actions
 
-  createEvent: function (callback, name, location, date) {
+  createEvent: function (event, callback) {
     this.ajax({
       method: 'POST',
       url: this.url + '/events',
-      data: JSON.stringify({"event": {"name":name, "location":location, "date":date}})
+      data: JSON.stringify(event)
     }, callback);
   },
 

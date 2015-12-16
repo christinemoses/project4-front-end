@@ -101,23 +101,20 @@
         </div>
       </form>
 
+      <!-- Show Event List Button -->
+      <button type="button" class="btn btn-default" id="show-event-list">View Your Events</button>
+
+
       <!-- Event List -->
       <div id="event-view">
         <h2>Your Events</h2>
-        <table class="table table-hover">
+        <table class="table table-hover" id="event-list">
           <tr>
             <th>Event Name</th>
             <th>Event Location</th>
             <th>Event Start Date</th>
             <th></th>
             <th></th>
-          </tr>
-          <tr>
-            <td>GDC</td>
-            <td>San Francisco</td>
-            <td>17/03/16</td>
-            <td><button class="edit btn btn-primary">Edit</button></td>
-            <td><button class="delete btn btn-danger">Delete</button></td>
           </tr>
         </table>
       </div>
@@ -149,7 +146,7 @@
         </div>
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default">Create Event</button>
+            <button type="submit" class="btn btn-default" id="create-event">Create Event</button>
           </div>
         </div>
       </form>
