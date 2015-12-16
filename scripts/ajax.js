@@ -102,7 +102,7 @@ var taskTracker_api = {
       this.ajax({
           method: 'PATCH',
           url: this.url + '/events/' + eventId + '/tasks/' + taskId,
-          data: JSON.stringify(event),
+          data: JSON.stringify(task),
       }, callback);
   },
 
