@@ -68,36 +68,48 @@ var taskTracker_api = {
     }, callback);
   },
 
-//updateEvent
+  updateEvent: function (eventId, event, callback) {
+      this.ajax({
+          method: 'PATCH',
+          url: this.url + '/events/' + eventId,
+          data: JSON.stringify(event),
+      }, callback);
+  },
 
-  deleteEvent: function (callback, eventId) {
+  deleteEvent: function (eventId, callback) {
     this.ajax({
       method: 'DELETE',
       url: this.url + '/events/' + eventId,
     }, callback);
   },
 
-  createTask: function (callback, eventId, name, date) {
+  createTask: function (eventId, task, callback) {
     this.ajax({
       method: 'POST',
       url: this.url + '/events/' + eventId + '/tasks',
-      data: JSON.stringify({"task": {"name":name, "date":date}})
+      data: JSON.stringify(task)
     }, callback);
   },
 
-  listTasks: function (callback, eventId) {
+  listTasks: function (eventId, callback) {
     this.ajax({
       method: 'GET',
       url: this.url + '/events/' + eventId + '/tasks'
     }, callback);
   },
 
-//updateTask
+  updateTask: function (eventId, taskId, task, callback) {
+      this.ajax({
+          method: 'PATCH',
+          url: this.url + '/events/' + eventId + '/tasks/' + taskId,
+          data: JSON.stringify(event),
+      }, callback);
+  },
 
-  deleteTask: function (callback, eventId, taskId) {
+  deleteTask: function (eventId, taskId, callback) {
     this.ajax({
       method: 'DELETE',
-      url: this.url + '/events/' + eventId + '/tasks/' + taskId,
+      url: this.url + '/events/' + eventId + '/tasks/' + taskId
     }, callback);
   }
 };

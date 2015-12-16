@@ -151,6 +151,37 @@
         </div>
       </form>
 
+      <!-- Edit an Event -->
+
+      <form class="form-horizontal" id="edit-event-form">
+        <h2>Edit an Event</h2>
+        <input type='hidden' name="eventId" id="eventId">
+        <div class="form-group">
+          <label for="edit-event-name" class="col-sm-2 control-label">Event Name</label>
+          <div class="col-sm-10">
+            <input type="text" name="name" class="form-control" id="edit-event-name" placeholder="Name">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="edit-event-location" class="col-sm-2 control-label">Event Location</label>
+          <div class="col-sm-10">
+            <input type="text" name="location" class="form-control" id="edit-event-location" placeholder="Location">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="edit-event-start" class="col-sm-2 control-label">Event Start Date</label>
+          <div class="col-sm-10">
+            <input type="date" name="date" class="form-control" id="edit-event-start" placeholder="Start Date">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default" id="create-event">Update Event</button>
+          </div>
+        </div>
+      </form>
+
+
       <!-- Task List -->
       <div id="task-view">
         <h2>Event Tasks</h2>
