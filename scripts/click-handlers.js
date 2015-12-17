@@ -84,7 +84,7 @@ $(function() {
   // Event Table - Edit and Delete Button
   $('#event-list').on('click', function(e){
     e.preventDefault();
-    var $target = $(event.target);
+    var $target = $(e.target);
     var $tr = $target.closest("tr");
     var id = $tr.data('id');
     if($target.hasClass("delete")){
@@ -169,21 +169,41 @@ $(function() {
     });
   });
 
+  // Task Table - Edit and Delete Buttons
+  $('#task-list').on('click', function(e){
+    e.preventDefault();
+    var $target = $(e.target);
+    var $tr = $target.closest("tr");
+    var eventId = $('#add-task-eventId').val();
+    var taskId = $tr.data('id');
+    if($target.hasClass("delete")){
+        console.log("deleting ", taskId);
+        $tr.remove();
+        taskTracker_api.deleteTask(eventId, taskId, function(err, data){});
+    }else if($target.hasClass("edit")){
+        console.log("editing ", taskId);
+        $('#taskId').val(taskId);
+        $('#edit-task-name').val($tr.find('.task-name').text());
+        $('#edit-task-date').val($tr.find('.task-date').text());
+        $tr.remove();
+    }
+  });
 
   // Edit Task
-  // $('#edit-event-form').on('submit', function(e) {
-  //   e.preventDefault();
-  //   var event = wrap('event', form2object(this));
-  //   var id = $('#eventId').val();
-  //   taskTracker_api.updateEvent(id, event, function(err, data){
-  //     if (err) {
-  //       alert("There was an error updating the event")
-  //     }
-  //     console.log('event updated');
-  //     $('#event-list tr:last').after(
-  //       '<tr data-id=' + data.event.id + '><td class="event-name">' + data.event.name +  '</td><td class="event-location">' + data.event.location + '</td><td class="event-date">' + data.event.date + '</td><td><button class="edit btn btn-primary">Edit</button></td><td><button class="delete btn btn-danger">Delete</button></td><td><button class="tasks btn btn-info">Event Tasks</button></td></tr>');
-  //   });
-  // });
+  $('#edit-task-form').on('submit', function(e) {
+    e.preventDefault();
+    var task = wrap('task', form2object(this));
+    var eventId = $('#add-task-eventId').val();
+    var taskId = $('#taskId').val();
+    taskTracker_api.updateTask(eventId, taskId, task, function(err, data){
+      if (err) {
+        alert("There was an error updating the task")
+      }
+      console.log('task updated');
+      $('#task-list tr:last').after(
+        '<tr data-id=' + data.task.id + '><td class="task-name">' + data.task.name +  '</td><td class="task-date">' + data.task.date + '</td><td><button class="edit btn btn-primary">Edit</button></td><td><button class="delete btn btn-danger">Delete</button></td></tr>');
+    });
+  });
 
 
   // calendar functionality & features
