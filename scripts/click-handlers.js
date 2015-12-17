@@ -28,9 +28,10 @@ $(function() {
         return;
       }
       console.log('New user created: ', credentials);
-
+      taskTracker_api.login(credentials, loginCallback);
     });
     e.preventDefault(); // prevents page from reloading
+
   });
 
   // Log in
@@ -43,6 +44,7 @@ $(function() {
 
     taskTracker_api.token = loginData.user.token;
     taskTracker_api.userId = loginData.user.id;
+    taskTracker_api.listEvents(eventListCallback);
   };
 
   $('#login-form').on('submit', function(e) {
@@ -67,15 +69,14 @@ $(function() {
    $('#new-event-form').on('submit', function(e) {
       e.preventDefault();
       var event = wrap('event', form2object(this));
-
+      $('input:text').val('');
+      $('#new-event-start').val('');
       taskTracker_api.createEvent(event, function(err, data){
         if (err) {
           alert("Error creating event");
           return;
         }
-
         console.log(data);
-
         $('#event-list tr:last').after(
           '<tr data-id=' + data.event.id + '><td class="event-name">' + data.event.name +  '</td><td class="event-location">' + data.event.location + '</td><td class="event-date">' + data.event.date + '</td><td><button class="edit btn btn-primary">Edit</button></td><td><button class="delete btn btn-danger">Delete</button></td><td><button class="event-tasks btn btn-info">Event Tasks</button></td></tr>');
       });
@@ -119,10 +120,10 @@ $(function() {
     });
   };
 
-  $('#show-event-list').on('click', function(e){
-    e.preventDefault();
-    taskTracker_api.listEvents(eventListCallback);
-  });
+  // $('#show-event-list').one('click', function(e){
+  //   e.preventDefault();
+  //   taskTracker_api.listEvents(eventListCallback);
+  // });
 
 
   var taskListCallback = function(err, data) {
@@ -132,16 +133,24 @@ $(function() {
     }
     var taskArray = data.tasks;
     taskArray.forEach(function(task, _index, _arr) {
-      $('#task-list tr:last').after(
-        '<tr data-id=' + task.id + '><td class="task-name">' + task.name + '</td><td class="task-date">' + task.date + '</td><td><button class="edit btn btn-primary">Edit</button></td><td><button class="delete btn btn-danger">Delete</button></td></tr>');
+      addTask(task);
     });
   }
 
+  var addTask = function(task) {
+    // pushing task to table
+    $('#task-list tr:last').after(
+      '<tr data-id=' + task.id + '><td class="task-name">' + task.name + '</td><td class="task-date">' + task.date + '</td><td><button class="edit btn btn-primary">Edit</button></td><td><button class="delete btn btn-danger">Delete</button></td></tr>');
+    // adding task to calendar
+
+  }
 
   // Edit Event
   $('#edit-event-form').on('submit', function(e) {
     e.preventDefault();
     var event = wrap('event', form2object(this));
+    $('input:text').val('');
+    $('#edit-event-start').val('');
     var id = $('#eventId').val();
     taskTracker_api.updateEvent(id, event, function(err, data){
       if (err) {
@@ -158,14 +167,15 @@ $(function() {
     e.preventDefault();
     var task = wrap('task', form2object(this));
     var eventId = $('#add-task-eventId').val();
+    $('input:text').val('');
+    $('#task-date').val('');
     taskTracker_api.createTask(eventId, task, function(err, data){
       if (err) {
         alert("Error creating task");
         return;
       }
       console.log(data);
-      $('#task-list tr:last').after(
-        '<tr data-id=' + data.task.id + '><td class="task-name">' + data.task.name + '</td><td class="task-date">' + data.task.date + '</td><td><button class="edit btn btn-primary">Edit</button></td><td><button class="delete btn btn-danger">Delete</button></td></tr>');
+      addTask(data.task);
     });
   });
 
@@ -195,13 +205,14 @@ $(function() {
     var task = wrap('task', form2object(this));
     var eventId = $('#add-task-eventId').val();
     var taskId = $('#taskId').val();
+    $('input:text').val('');
+    $('#edit-task-date').val('');
     taskTracker_api.updateTask(eventId, taskId, task, function(err, data){
       if (err) {
         alert("There was an error updating the task")
       }
       console.log('task updated');
-      $('#task-list tr:last').after(
-        '<tr data-id=' + data.task.id + '><td class="task-name">' + data.task.name +  '</td><td class="task-date">' + data.task.date + '</td><td><button class="edit btn btn-primary">Edit</button></td><td><button class="delete btn btn-danger">Delete</button></td></tr>');
+      addTask(data.task);
     });
   });
 
