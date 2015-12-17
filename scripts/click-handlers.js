@@ -142,8 +142,16 @@ $(function() {
     $('#task-list tr:last').after(
       '<tr data-id=' + task.id + '><td class="task-name">' + task.name + '</td><td class="task-date">' + task.date + '</td><td><button class="edit btn btn-primary">Edit</button></td><td><button class="delete btn btn-danger">Delete</button></td></tr>');
     // adding task to calendar
-
+    $('#calendar').fullCalendar('addEventSource', [
+        {
+            id : task.id,
+            title : task.name,
+            start : task.date
+        },
+      ]);
   }
+
+
 
   // Edit Event
   $('#edit-event-form').on('submit', function(e) {
@@ -189,6 +197,7 @@ $(function() {
     if($target.hasClass("delete")){
         console.log("deleting ", taskId);
         $tr.remove();
+        $('#calendar').fullCalendar('removeEvents', [taskId]);
         taskTracker_api.deleteTask(eventId, taskId, function(err, data){});
     }else if($target.hasClass("edit")){
         console.log("editing ", taskId);
@@ -196,6 +205,7 @@ $(function() {
         $('#edit-task-name').val($tr.find('.task-name').text());
         $('#edit-task-date').val($tr.find('.task-date').text());
         $tr.remove();
+        $('#calendar').fullCalendar('removeEvents', [taskId]);
     }
   });
 
