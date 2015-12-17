@@ -105,11 +105,8 @@ $(function() {
           if (err) {
             alert("There was an error retrieving the task list")
           }
-
         });
     }
-
-
   });
 
   // List Events
@@ -158,6 +155,25 @@ $(function() {
         '<tr data-id=' + data.task.id + '><td class="task-name">' + data.task.name + '</td><td class="task-date">' + data.task.date + '</td><td><button class="edit btn btn-primary">Edit</button></td><td><button class="delete btn btn-danger">Delete</button></td></tr>');
     });
   });
+
+  // Edit a Task
+  $('#edit-task-form').on('submit', function(e) {
+    e.preventDefault();
+    var event = wrap('event', form2object(this));
+    var id = $('#eventId').val();
+    var taskId = $('#  ')
+    taskTracker_api.updateEvent(id, event, function(err, data){
+      if (err) {
+        alert("There was an error updating the event")
+      }
+      console.log('event updated');
+      $('#event-list tr:last').after(
+        '<tr data-id=' + data.event.id + '><td class="event-name">' + data.event.name +  '</td><td class="event-location">' + data.event.location + '</td><td class="event-date">' + data.event.date + '</td><td><button class="edit btn btn-primary">Edit</button></td><td><button class="delete btn btn-danger">Delete</button></td><td><button class="tasks btn btn-info">Event Tasks</button></td></tr>');
+    });
+  });
+
+
+  // Delete a Task
 
 
   // calendar functionality & features
