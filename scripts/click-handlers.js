@@ -29,6 +29,8 @@ $(function() {
       }
       console.log('New user created: ', credentials);
       taskTracker_api.login(credentials, loginCallback);
+      $('#reg-popup').modal('hide');
+      $('.modal-backdrop').remove();
     });
     e.preventDefault(); // prevents page from reloading
 
@@ -51,6 +53,11 @@ $(function() {
     var credentials = wrap('credentials', form2object(this));
     e.preventDefault();
     taskTracker_api.login(credentials, loginCallback);
+    $('#login-popup').modal('hide');
+    $('.modal-backdrop').remove();
+    $('#landing-page-elements').hide();
+    $('#event-view').show();
+    $('#event-add-button').show();
   });
 
     // Logout
@@ -88,6 +95,7 @@ $(function() {
     var $target = $(e.target);
     var $tr = $target.closest("tr");
     var id = $tr.data('id');
+    var eventName = $tr.find('.event-name').text()
     if($target.hasClass("delete")){
         console.log("deleting ", id);
         $tr.remove();
@@ -95,13 +103,15 @@ $(function() {
     }else if($target.hasClass("edit")){
         console.log("editing ", id);
         $('#eventId').val(id);
-        $('#edit-event-name').val($tr.find('.event-name').text());
+        $('#edit-event-name').val(eventName);
         $('#edit-event-location').val($tr.find('.event-location').text());
         $('#edit-event-start').val($tr.find('.event-date').text());
         $tr.remove();
     }else if($target.hasClass("event-tasks")) {
+        $('.task-detail').remove();
         $("#task-view").show();
         $('#add-task-eventId').val(id);
+        $('.task-list-label').text(eventName + " Tasks");
         taskTracker_api.listTasks(id, taskListCallback);
     }
   });
@@ -140,7 +150,8 @@ $(function() {
   var addTask = function(task) {
     // pushing task to table
     $('#task-list tr:last').after(
-      '<tr data-id=' + task.id + '><td class="task-name">' + task.name + '</td><td class="task-date">' + task.date + '</td><td><button class="edit btn btn-primary">Edit</button></td><td><button class="delete btn btn-danger">Delete</button></td></tr>');
+      '<tr class="task-detail" data-id=' + task.id + '><td class="task-name">' + task.name + '</td><td class="task-date">' + task.date + '</td><td><button class="edit btn btn-primary">Edit</button></td><td><button class="delete btn btn-danger">Delete</button></td></tr>');
+
     // adding task to calendar
     $('#calendar').fullCalendar('addEventSource', [
         {

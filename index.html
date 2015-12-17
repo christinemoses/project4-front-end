@@ -4,26 +4,20 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
     <meta name="author" content="Christine Moses">
     <meta name="keywords" content="event, tradeshow, planning, to-do list, task, corporate event, trade show, conference, event services, calendar">
     <meta name="description" content="GA WDI Project 4 - Event Task Tracker App">
-    <title>Tradeshow Task Tracker App</title>
+    <title>Tradeshow Task Tracker | Event Management App</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link href="./styles/main.css" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="calendar.ico">
 
     <!-- Full Calendar -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.5.0/fullcalendar.min.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
 
   </head>
 
@@ -34,72 +28,106 @@
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <a class="navbar-brand" href="#" id="logo">Tradeshow Task Tracker</a>
-        <button type="button" class="btn btn-default navbar-btn" id="nav-task-view">Task View</button>
-        <button type="button" class="btn btn-default navbar-btn" id="nav-cal-view">Calendar View</button>
+        <button type="button" class="btn btn-default navbar-btn" id="nav-event-view">Event List</button>
         <button type="button" class="btn btn-default navbar-btn navbar-right" id="nav-log-out">Sign Out</button>
       </div>
     </nav>
 
 
     <div class="jumbotron">
-      <h1>Tradeshow Task Tracker</h1>
-      <p>Manage your event planning activities and deadlines in one convenient place</p>
 
-      <div class="landing-page-buttons">
-        <button type="button" class="btn btn-default" id="register-button">Register</button>
-        <button type="button" class="btn btn-default" id="login-button">Log In</button>
+      <div id='landing-page-elements'>
+
+        <h1>Tradeshow Task Tracker</h1>
+        <p>Manage your event planning activities and deadlines in one convenient place</p>
+
+        <div class="landing-page-buttons">
+          <button type="button" class="btn btn-default" data-toggle="modal" data-target="#reg-popup" id="register-button">Register</button>
+          <button type="button" class="btn btn-default" data-toggle="modal" data-target="#login-popup" id="login-button">Log In</button>
+        </div>
+
       </div>
+    <!-- Registration Form Modal-->
 
-      <!-- registration form -->
-      <form class="form-horizontal" id="reg-form">
-        <h2>Register</h2>
-        <div class="form-group">
-          <label for="reg-email" class="col-sm-2 control-label">Email</label>
-          <div class="col-sm-10">
-            <input type="email" name="email" class="form-control" id="reg-email" placeholder="Email">
+    <div class="modal fade" id="reg-popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog register" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Create a New Account</h4>
+          </div>
+          <div class="modal-body">
+
+            <!-- registration form -->
+            <form class="form-horizontal" id="reg-form">
+              <h2>Register</h2>
+              <div class="form-group">
+                <label for="reg-email" class="col-sm-2 control-label">Email</label>
+                <div class="col-sm-10">
+                  <input type="email" name="email" class="form-control" id="reg-email" placeholder="Email">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="reg-pw" class="col-sm-2 control-label">Password</label>
+                <div class="col-sm-10">
+                  <input type="password" name="password" class="form-control" id="reg-pw" placeholder="Password">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="reg-pw-confirm" class="col-sm-2 control-label">Password Confirmation</label>
+                <div class="col-sm-10">
+                  <input type="password" name="password_confirmation" class="form-control" id="reg-pw-confirm" placeholder="Re-Enter Password">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="submit" class="btn btn-default">Create Account</button>
+                </div>
+              </div>
+            </form>
+
           </div>
         </div>
-        <div class="form-group">
-          <label for="reg-pw" class="col-sm-2 control-label">Password</label>
-          <div class="col-sm-10">
-            <input type="password" name="password" class="form-control" id="reg-pw" placeholder="Password">
+      </div>
+    </div>
+
+    <!-- Login form MODAL-->
+    <div class="modal fade" id="login-popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Login with Your Email Address</h4>
           </div>
-        </div>
-        <div class="form-group">
-          <label for="reg-pw-confirm" class="col-sm-2 control-label">Password Confirmation</label>
-          <div class="col-sm-10">
-            <input type="password" name="password_confirmation" class="form-control" id="reg-pw-confirm" placeholder="Re-Enter Password">
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default">Create Account</button>
-          </div>
-        </div>
-      </form>
+          <div class="modal-body">
 
       <!-- Log In form -->
 
-      <form class="form-horizontal" id="login-form">
-        <h2>Log In</h2>
-        <div class="form-group">
-          <label for="login-email" class="col-sm-2 control-label">Email</label>
-          <div class="col-sm-10">
-            <input type="email" name="email" class="form-control" id="login-email" placeholder="Email">
+            <form class="form-horizontal" id="login-form">
+              <h2>Log In</h2>
+              <div class="form-group">
+                <label for="login-email" class="col-sm-2 control-label">Email</label>
+                <div class="col-sm-10">
+                  <input type="email" name="email" class="form-control" id="login-email" placeholder="Email">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="login-pw" class="col-sm-2 control-label">Password</label>
+                <div class="col-sm-10">
+                  <input type="password" name="password" class="form-control" id="login-pw" placeholder="Password">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="submit" class="btn btn-default">Log In To Your Account</button>
+                </div>
+              </div>
+            </form>
+
           </div>
         </div>
-        <div class="form-group">
-          <label for="login-pw" class="col-sm-2 control-label">Password</label>
-          <div class="col-sm-10">
-            <input type="password" name="password" class="form-control" id="login-pw" placeholder="Password">
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default">Log In To Your Account</button>
-          </div>
-        </div>
-      </form>
+      </div>
+    </div>
 
       <!-- Show Event List Button -->
       <button type="button" class="btn btn-default" id="show-event-list">View Your Events</button>
@@ -177,7 +205,7 @@
         </div>
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default" id="create-event">Update Event</button>
+            <button type="submit" class="btn btn-default" id="update-event">Update Event</button>
           </div>
         </div>
       </form>
@@ -185,7 +213,7 @@
 
       <!-- Task List -->
       <div id="task-view">
-        <h2>Event Tasks</h2>
+        <h2 class="task-list-label"></h2>
         <table class="table table-hover" id="task-list">
           <tr>
             <th>Task Description</th>
@@ -249,25 +277,8 @@
       </form>
 
       <!-- Calendar View -->
-      <h2>Event Calendar</h2>
+      <h2 id="task-calendar-label">Task Calendar</h2>
       <div id='calendar'></div>
-
-      <!-- Calendar Modal
-      <div id="fullCalModal" class="modal fade">
-          <div class="modal-dialog">
-              <div class="modal-content">
-                  <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
-                      <h4 id="modalTitle" class="modal-title"></h4>
-                  </div>
-                  <div id="modalBody" class="modal-body"></div>
-                  <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                      <button class="btn btn-primary"><a id="eventUrl" target="_blank">Event Page</a></button>
-                  </div>
-              </div>
-          </div>
-      </div> -->
 
     </div> <!-- jumbotron -->
 
