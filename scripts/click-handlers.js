@@ -32,6 +32,7 @@ $(function() {
       $('#reg-popup').modal('hide');
       $('.modal-backdrop').remove();
       $('#event-view').show();
+      $('#nav-log-out').show();
     });
     e.preventDefault(); // prevents page from reloading
 
@@ -59,6 +60,7 @@ $(function() {
     $('#landing-page-elements').hide();
     $('#event-view').show();
     $('#event-add-button').show();
+    $('#nav-log-out').show();
   });
 
     // Logout
