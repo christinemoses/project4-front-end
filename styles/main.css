@@ -1,0 +1,186 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #ECF1F2;
+}
+
+.navbar {
+  background-color: #BED2D9;
+}
+
+#nav-log-out {
+  display: none;
+}
+
+
+#logo {
+  color: black;
+  margin-left: -75px;
+  margin-right: 50px;
+}
+
+.jumbotron {
+  margin-top: 50px;
+  margin-bottom: 100px;
+  margin-right: 150px;
+  margin-left: 80px;
+  background-color: #ECF1F2;
+  /*background-image: url(./images/);*/
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+
+}
+
+#register-button {
+  background-color: #fff;
+  color: #333;
+  border-color: #ccc;
+  width: 100px;
+}
+
+#login-button {
+  background-color: #fff;
+  color: #333;
+  border-color: #ccc;
+  width: 100px;
+}
+
+/*@media only screen and (max-width: 1000px) {
+   .jumbotron {
+      background-image: url(./images/climber3-1000.jpg);
+      height: 600px;
+    }
+    #landing-page-headline {
+      font-size: 42px;
+    }
+    #landing-page-subhead {
+      font-size: 22px;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+   .jumbotron {
+      background-image: url(./images/climber3-700.jpg);
+      height: 500px;
+    }
+    #landing-page-headline {
+      font-size: 28px;
+    }
+    #landing-page-subhead {
+      font-size: 18px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+   .jumbotron {
+      background-image: url(./images/climber3-500.jpg);
+      height: 400px;
+    }
+    #landing-page-headline {
+      font-size: 24px;
+    }
+    #landing-page-subhead {
+      font-size: 16px;
+    }
+}
+
+*/
+
+/* registration form & modal */
+
+#registration-form {
+  display: inline;
+}
+
+#register {
+  padding-top: 50px;
+}
+#register .form-wrap {
+  width: 30%;
+  margin: 0 auto;
+}
+#register h1 {
+  color: #118C4E;
+  font-size: 20px;
+  text-align: center;
+  font-weight: bold;
+  padding-bottom: 20px;
+}
+#register .form-group {
+  margin-bottom: 25px;
+}
+#register .btn.btn-custom {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+
+.form-control {
+  color: #212121;
+}
+.btn-custom {
+  color: #fff;
+  background-color: #FF9009;
+}
+.btn-custom:hover,
+.btn-custom:focus {
+  color: #fff;
+}
+
+
+/* login form & modal */
+
+#login-submit-button {
+  background-color: #FF9009;
+  border-color: #FF9009;
+}
+
+/* page elements */
+
+#landing-page-elements{
+  display: inline;
+}
+
+#show-event-list {
+  display: none;
+}
+
+#event-view {
+  display: none;
+}
+
+#event-add-button {
+  display: none;
+}
+
+#new-event-form {
+  display: inline;
+}
+
+#edit-event-form {
+  display: inline;
+}
+
+#update-event {
+  display: inline;
+}
+
+#task-view {
+  display: none;
+}
+
+#new-task-form {
+  display: inline;
+}
+
+#edit-task-form{
+  display: inline;
+}
+
+#edit-task{
+  display: inline;
+}
+
+#task-calendar-label{
+  display: none;
+}
+

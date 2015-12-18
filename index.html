@@ -4,24 +4,20 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
     <meta name="author" content="Christine Moses">
     <meta name="keywords" content="event, tradeshow, planning, to-do list, task, corporate event, trade show, conference, event services, calendar">
     <meta name="description" content="GA WDI Project 4 - Event Task Tracker App">
-    <title>Tradeshow Task Tracker App</title>
+    <title>Tradeshow Task Tracker | Event Management App</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link href="./styles/main.css" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="calendar.ico">
 
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <!-- Full Calendar -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.5.0/fullcalendar.min.css" rel="stylesheet">
 
   </head>
 
@@ -31,179 +27,327 @@
 
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="#">Tradeshow Task Tracker</a>
-        <button type="button" class="btn btn-default navbar-btn">Task View</button>
-        <button type="button" class="btn btn-default navbar-btn">Calendar View</button>
-        <button type="button" class="btn btn-default navbar-btn navbar-right">Sign Out</button>
+        <a class="navbar-brand" href="#" id="logo">Tradeshow Task Tracker</a>
+      <!-- Show Event List Button -->
+      <button type="button" class="btn btn-default navbar-btn" id="show-event-list">Return To Your Events</button>
+        <button type="button" class="btn btn-default navbar-btn navbar-right" id="nav-log-out">Sign Out</button>
       </div>
     </nav>
 
 
     <div class="jumbotron">
-      <h1>Tradeshow Task Tracker</h1>
-      <p>Manage your event planning activities and due dates in one convenient place</p>
 
-      <div class="landing-page-buttons">
-        <button type="button" class="btn btn-default">Register</button>
-        <button type="button" class="btn btn-default">Log In</button>
+      <div id='landing-page-elements'>
+
+        <h1>Tradeshow Task Tracker</h1>
+        <p>Manage your event planning activities and deadlines in one convenient place</p>
+
+        <div class="landing-page-buttons">
+          <button type="button" class="btn btn-default" data-toggle="modal" data-target="#reg-popup" id="register-button">Register</button>
+          <button type="button" class="btn btn-default" data-toggle="modal" data-target="#login-popup" id="login-button">Log In</button>
+        </div>
+
       </div>
+    <!-- Registration Form Modal-->
 
-      <!-- registration form -->
-      <form class="form-horizontal">
-        <h2>Register</h2>
-        <div class="form-group">
-          <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-          <div class="col-sm-10">
-            <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+    <div class="modal fade" id="reg-popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog register" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Create a New Account</h4>
+          </div>
+          <div class="modal-body">
+
+            <!-- registration form -->
+            <form class="form-horizontal" id="reg-form">
+              <div class="form-group">
+                <label for="reg-email" class="col-sm-2 control-label">Email</label>
+                <div class="col-sm-10">
+                  <input type="email" name="email" class="form-control" id="reg-email" placeholder="Email">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="reg-pw" class="col-sm-2 control-label">Password</label>
+                <div class="col-sm-10">
+                  <input type="password" name="password" class="form-control" id="reg-pw" placeholder="Password">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="reg-pw-confirm" class="col-sm-2 control-label">Password Confirmation</label>
+                <div class="col-sm-10">
+                  <input type="password" name="password_confirmation" class="form-control" id="reg-pw-confirm" placeholder="Re-Enter Password">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="submit" class="btn btn-default">Register</button>
+                </div>
+              </div>
+            </form>
+
           </div>
         </div>
-        <div class="form-group">
-          <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-          <div class="col-sm-10">
-            <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+      </div>
+    </div>
+
+    <!-- Login form MODAL-->
+    <div class="modal fade" id="login-popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Login with Your Email Address</h4>
           </div>
-        </div>
-        <div class="form-group">
-          <label for="inputPassword3" class="col-sm-2 control-label">Password Confirmation</label>
-          <div class="col-sm-10">
-            <input type="password" class="form-control" id="inputPassword3" placeholder="Re-Enter Password">
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default">Create Account</button>
-          </div>
-        </div>
-      </form>
+          <div class="modal-body">
 
       <!-- Log In form -->
 
-      <form class="form-horizontal">
-        <h2>Log In</h2>
-        <div class="form-group">
-          <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-          <div class="col-sm-10">
-            <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+            <form class="form-horizontal" id="login-form">
+              <div class="form-group">
+                <label for="login-email" class="col-sm-2 control-label">Email</label>
+                <div class="col-sm-10">
+                  <input type="email" name="email" class="form-control" id="login-email" placeholder="Email">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="login-pw" class="col-sm-2 control-label">Password</label>
+                <div class="col-sm-10">
+                  <input type="password" name="password" class="form-control" id="login-pw" placeholder="Password">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="submit" class="btn btn-default">Log In To Your Account</button>
+                </div>
+              </div>
+            </form>
+
           </div>
         </div>
-        <div class="form-group">
-          <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-          <div class="col-sm-10">
-            <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default">Log In To Your Account</button>
-          </div>
-        </div>
-      </form>
+      </div>
+    </div>
+
 
       <!-- Event List -->
-      <h2>Your Events</h2>
-      <table class="table table-hover">
-        <tr>
-          <th>Event Name</th>
-          <th>Event Location</th>
-          <th>Event Start Date</th>
-          <th></th>
-          <th></th>
-        </tr>
-        <tr>
-          <td>GDC</td>
-          <td>San Francisco</td>
-          <td>17/03/16</td>
-          <td>Edit Button</td>
-          <td>Delete Button</td>
-        </tr>
-      </table>
-
-      <!-- Add New Event Button -->
-      <button type="button" class="btn btn-default">Add a New Event</button>
+      <div id="event-view">
+        <h2>Your Events</h2>
+        <table class="table table-hover" id="event-list">
+          <tr>
+            <th>Event Name</th>
+            <th>Event Location</th>
+            <th>Event Start Date</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </table>
+        <!-- Add New Event Button -->
+        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#new-event-popup" id="event-add-button">Create a new event</button>
+      </div>
 
 
-      <!-- Create New Event -->
+    <!-- Create Event form MODAL-->
+    <div class="modal fade" id="new-event-popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Create a new event</h4>
+          </div>
+          <div class="modal-body">
 
-      <form class="form-horizontal">
-        <h2>Create a New Event</h2>
-        <div class="form-group">
-          <label for="inputEmail3" class="col-sm-2 control-label">Event Name</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputEmail3" placeholder="Name">
+            <!-- Create New Event -->
+            <form class="form-horizontal" id="new-event-form">
+              <div class="form-group">
+                <label for="new-event-name" class="col-sm-2 control-label">Event Name</label>
+                <div class="col-sm-10">
+                  <input type="text" name="name" class="form-control" id="new-event-name" placeholder="Name">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="new-event-location" class="col-sm-2 control-label">Event Location</label>
+                <div class="col-sm-10">
+                  <input type="text" name="location" class="form-control" id="new-event-location" placeholder="Location">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="new-event-start" class="col-sm-2 control-label">Event Start Date</label>
+                <div class="col-sm-10">
+                  <input type="date" name="date" class="form-control" id="new-event-start" placeholder="Start Date">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="submit" class="btn btn-default" id="create-event">Create Event</button>
+                </div>
+              </div>
+            </form>
+
           </div>
         </div>
-        <div class="form-group">
-          <label for="inputEmail3" class="col-sm-2 control-label">Event Location</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputEmail3" placeholder="Location">
+      </div>
+    </div>
+
+
+    <!-- Edit Event form MODAL-->
+    <div class="modal fade" id="edit-event-popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel">Edit an event</h4>
+          </div>
+          <div class="modal-body">
+
+            <!-- Edit an Event -->
+            <form class="form-horizontal" id="edit-event-form">
+              <input type='hidden' name="eventId" id="eventId">
+              <div class="form-group">
+                <label for="edit-event-name" class="col-sm-2 control-label">Event Name</label>
+                <div class="col-sm-10">
+                  <input type="text" name="name" class="form-control" id="edit-event-name" placeholder="Name">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="edit-event-location" class="col-sm-2 control-label">Event Location</label>
+                <div class="col-sm-10">
+                  <input type="text" name="location" class="form-control" id="edit-event-location" placeholder="Location">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="edit-event-start" class="col-sm-2 control-label">Event Start Date</label>
+                <div class="col-sm-10">
+                  <input type="date" name="date" class="form-control" id="edit-event-start" placeholder="Start Date">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="submit" class="btn btn-default" id="update-event">Update Event</button>
+                </div>
+              </div>
+            </form>
+
           </div>
         </div>
-        <div class="form-group">
-          <label for="inputPassword3" class="col-sm-2 control-label">Event Start Date</label>
-          <div class="col-sm-10">
-            <input type="date" class="form-control" id="inputPassword3" placeholder="Start Date">
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default">Create Event</button>
-          </div>
-        </div>
-      </form>
+      </div>
+    </div>
+
+
 
       <!-- Task List -->
-      <h2>Event Tasks</h2>
-      <table class="table table-hover">
-        <tr>
-          <th>Task Description</th>
-          <th>Task Due Date</th>
-          <th></th>
-          <th></th>
-        </tr>
-        <tr>
-          <td>Order Electrical service and labor</td>
-          <td>10/03/16</td>
-          <td>Edit Button</td>
-          <td>Delete Button</td>
-        </tr>
-      </table>
-
+      <div id="task-view">
+        <h2 class="task-list-label"></h2>
+        <table class="table table-hover" id="task-list">
+          <tr>
+            <th>Task Description</th>
+            <th>Task Due Date</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </table>
 
       <!-- Add A Task -->
-      <button type="button" class="btn btn-default">Add a Task</button>
+      <button type="button" class="btn btn-default" data-toggle="modal" data-target="#add-task-popup" id="task-add-button">Add a Task</button>
+      </div>
 
-      <!-- Add a Task -->
+    <!-- Add Task form MODAL-->
+      <div class="modal fade" id="add-task-popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Add a task</h4>
+            </div>
+            <div class="modal-body">
 
-      <form class="form-horizontal">
-        <h2>Add a Task</h2>
-        <div class="form-group">
-          <label for="inputEmail3" class="col-sm-2 control-label">Task Description</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputEmail3" placeholder="Description">
+            <!-- Add a Task -->
+
+            <form class="form-horizontal" id="new-task-form">
+              <input type='hidden' name="eventId" id="add-task-eventId">
+              <div class="form-group">
+                <label for="task-description" class="col-sm-2 control-label">Task Description</label>
+                <div class="col-sm-10">
+                  <input type="text" name="name" class="form-control" id="task-description" placeholder="Description">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="task-date" class="col-sm-2 control-label">Task Due Date</label>
+                <div class="col-sm-10">
+                  <input type="date" name="date" class="form-control" id="task-date" placeholder="Due Date">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="submit" class="btn btn-default">Add Task</button>
+                </div>
+              </div>
+            </form>
+
           </div>
         </div>
-        <div class="form-group">
-          <label for="inputPassword3" class="col-sm-2 control-label">Task Due Date</label>
-          <div class="col-sm-10">
-            <input type="date" class="form-control" id="inputPassword3" placeholder="Due Date">
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default">Add Task</button>
-          </div>
-        </div>
-      </form>
+      </div>
+    </div>
 
+
+
+    <!-- Edit Task form MODAL-->
+      <div class="modal fade" id="edit-task-popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="myModalLabel">Edit a Task</h4>
+            </div>
+            <div class="modal-body">
+
+            <!-- Edit a Task -->
+
+            <form class="form-horizontal" id="edit-task-form">
+              <input type='hidden' name="task-eventId" id="edit-task-eventId">
+              <input type='hidden' name="taskId" id="taskId">
+              <div class="form-group">
+                <label for="edit-task-name" class="col-sm-2 control-label">Task Description</label>
+                <div class="col-sm-10">
+                  <input type="text" name="name" class="form-control" id="edit-task-name" placeholder="Name">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="edit-task-date" class="col-sm-2 control-label">Task Due Date</label>
+                <div class="col-sm-10">
+                  <input type="date" name="date" class="form-control" id="edit-task-date" placeholder="Due Date">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="submit" class="btn btn-default" id="edit-task">Update Task</button>
+                </div>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+      <!-- Calendar View -->
+    <div id="calendar-view">
+      <h2 class="task-calendar-label"></h2>
+      <div id='calendar'></div>
 
     </div> <!-- jumbotron -->
 
-
-
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+    <!-- full calendar scripts -->
+    <script src="https://cdn.jsdelivr.net/momentjs/2.10.6/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.5.0/fullcalendar.min.js"></script>
+
+    <!-- Tradeshow Task Tracker JS files -->
     <script type="text/javascript" src="scripts/click-handlers.js"></script>
     <script type="text/javascript" src="scripts/ajax.js"></script>
 
