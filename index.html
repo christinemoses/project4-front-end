@@ -28,7 +28,8 @@
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <a class="navbar-brand" href="#" id="logo">Tradeshow Task Tracker</a>
-        <button type="button" class="btn btn-default navbar-btn" id="nav-event-view">Event List</button>
+      <!-- Show Event List Button -->
+      <button type="button" class="btn btn-default navbar-btn" id="show-event-list">Return To Your Events</button>
         <button type="button" class="btn btn-default navbar-btn navbar-right" id="nav-log-out">Sign Out</button>
       </div>
     </nav>
@@ -60,7 +61,6 @@
 
             <!-- registration form -->
             <form class="form-horizontal" id="reg-form">
-              <h2>Register</h2>
               <div class="form-group">
                 <label for="reg-email" class="col-sm-2 control-label">Email</label>
                 <div class="col-sm-10">
@@ -81,7 +81,7 @@
               </div>
               <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                  <button type="submit" class="btn btn-default">Create Account</button>
+                  <button type="submit" class="btn btn-default">Register</button>
                 </div>
               </div>
             </form>
@@ -104,7 +104,6 @@
       <!-- Log In form -->
 
             <form class="form-horizontal" id="login-form">
-              <h2>Log In</h2>
               <div class="form-group">
                 <label for="login-email" class="col-sm-2 control-label">Email</label>
                 <div class="col-sm-10">
@@ -129,9 +128,6 @@
       </div>
     </div>
 
-      <!-- Show Event List Button -->
-      <button type="button" class="btn btn-default" id="show-event-list">View Your Events</button>
-
 
       <!-- Event List -->
       <div id="event-view">
@@ -146,69 +142,96 @@
             <th></th>
           </tr>
         </table>
+        <!-- Add New Event Button -->
+        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#new-event-popup" id="event-add-button">Create a new event</button>
       </div>
-      <!-- Add New Event Button -->
-      <button type="button" class="btn btn-default" id="event-add-button">Add a New Event</button>
 
 
-      <!-- Create New Event -->
+    <!-- Create Event form MODAL-->
+    <div class="modal fade" id="new-event-popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Create a new event</h4>
+          </div>
+          <div class="modal-body">
 
-      <form class="form-horizontal" id="new-event-form">
-        <h2>Create a New Event</h2>
-        <div class="form-group">
-          <label for="new-event-name" class="col-sm-2 control-label">Event Name</label>
-          <div class="col-sm-10">
-            <input type="text" name="name" class="form-control" id="new-event-name" placeholder="Name">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="new-event-location" class="col-sm-2 control-label">Event Location</label>
-          <div class="col-sm-10">
-            <input type="text" name="location" class="form-control" id="new-event-location" placeholder="Location">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="new-event-start" class="col-sm-2 control-label">Event Start Date</label>
-          <div class="col-sm-10">
-            <input type="date" name="date" class="form-control" id="new-event-start" placeholder="Start Date">
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default" id="create-event">Create Event</button>
-          </div>
-        </div>
-      </form>
+            <!-- Create New Event -->
+            <form class="form-horizontal" id="new-event-form">
+              <div class="form-group">
+                <label for="new-event-name" class="col-sm-2 control-label">Event Name</label>
+                <div class="col-sm-10">
+                  <input type="text" name="name" class="form-control" id="new-event-name" placeholder="Name">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="new-event-location" class="col-sm-2 control-label">Event Location</label>
+                <div class="col-sm-10">
+                  <input type="text" name="location" class="form-control" id="new-event-location" placeholder="Location">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="new-event-start" class="col-sm-2 control-label">Event Start Date</label>
+                <div class="col-sm-10">
+                  <input type="date" name="date" class="form-control" id="new-event-start" placeholder="Start Date">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="submit" class="btn btn-default" id="create-event">Create Event</button>
+                </div>
+              </div>
+            </form>
 
-      <!-- Edit an Event -->
+          </div>
+        </div>
+      </div>
+    </div>
 
-      <form class="form-horizontal" id="edit-event-form">
-        <h2>Edit an Event</h2>
-        <input type='hidden' name="eventId" id="eventId">
-        <div class="form-group">
-          <label for="edit-event-name" class="col-sm-2 control-label">Event Name</label>
-          <div class="col-sm-10">
-            <input type="text" name="name" class="form-control" id="edit-event-name" placeholder="Name">
+
+    <!-- Edit Event form MODAL-->
+    <div class="modal fade" id="edit-event-popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel">Edit an event</h4>
+          </div>
+          <div class="modal-body">
+
+            <!-- Edit an Event -->
+            <form class="form-horizontal" id="edit-event-form">
+              <input type='hidden' name="eventId" id="eventId">
+              <div class="form-group">
+                <label for="edit-event-name" class="col-sm-2 control-label">Event Name</label>
+                <div class="col-sm-10">
+                  <input type="text" name="name" class="form-control" id="edit-event-name" placeholder="Name">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="edit-event-location" class="col-sm-2 control-label">Event Location</label>
+                <div class="col-sm-10">
+                  <input type="text" name="location" class="form-control" id="edit-event-location" placeholder="Location">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="edit-event-start" class="col-sm-2 control-label">Event Start Date</label>
+                <div class="col-sm-10">
+                  <input type="date" name="date" class="form-control" id="edit-event-start" placeholder="Start Date">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="submit" class="btn btn-default" id="update-event">Update Event</button>
+                </div>
+              </div>
+            </form>
+
           </div>
         </div>
-        <div class="form-group">
-          <label for="edit-event-location" class="col-sm-2 control-label">Event Location</label>
-          <div class="col-sm-10">
-            <input type="text" name="location" class="form-control" id="edit-event-location" placeholder="Location">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="edit-event-start" class="col-sm-2 control-label">Event Start Date</label>
-          <div class="col-sm-10">
-            <input type="date" name="date" class="form-control" id="edit-event-start" placeholder="Start Date">
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default" id="update-event">Update Event</button>
-          </div>
-        </div>
-      </form>
+      </div>
+    </div>
+
 
 
       <!-- Task List -->
@@ -222,62 +245,94 @@
             <th></th>
           </tr>
         </table>
-      </div>
 
       <!-- Add A Task -->
-      <button type="button" class="btn btn-default" id="task-add-button">Add a Task</button>
+      <button type="button" class="btn btn-default" data-toggle="modal" data-target="#add-task-popup" id="task-add-button">Add a Task</button>
+      </div>
 
-      <!-- Add a Task -->
+    <!-- Add Task form MODAL-->
+      <div class="modal fade" id="add-task-popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Add a task</h4>
+            </div>
+            <div class="modal-body">
 
-      <form class="form-horizontal" id="new-task-form">
-        <h2>Add a Task</h2>
-        <input type='hidden' name="eventId" id="add-task-eventId">
-        <div class="form-group">
-          <label for="task-description" class="col-sm-2 control-label">Task Description</label>
-          <div class="col-sm-10">
-            <input type="text" name="name" class="form-control" id="task-description" placeholder="Description">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="task-date" class="col-sm-2 control-label">Task Due Date</label>
-          <div class="col-sm-10">
-            <input type="date" name="date" class="form-control" id="task-date" placeholder="Due Date">
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default">Add Task</button>
-          </div>
-        </div>
-      </form>
+            <!-- Add a Task -->
 
-      <!-- Edit a Task -->
+            <form class="form-horizontal" id="new-task-form">
+              <input type='hidden' name="eventId" id="add-task-eventId">
+              <div class="form-group">
+                <label for="task-description" class="col-sm-2 control-label">Task Description</label>
+                <div class="col-sm-10">
+                  <input type="text" name="name" class="form-control" id="task-description" placeholder="Description">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="task-date" class="col-sm-2 control-label">Task Due Date</label>
+                <div class="col-sm-10">
+                  <input type="date" name="date" class="form-control" id="task-date" placeholder="Due Date">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="submit" class="btn btn-default">Add Task</button>
+                </div>
+              </div>
+            </form>
 
-      <form class="form-horizontal" id="edit-task-form">
-        <h2>Edit a Task</h2>
-        <input type='hidden' name="task-eventId" id="edit-task-eventId">
-        <input type='hidden' name="taskId" id="taskId">
-        <div class="form-group">
-          <label for="edit-task-name" class="col-sm-2 control-label">Task Description</label>
-          <div class="col-sm-10">
-            <input type="text" name="name" class="form-control" id="edit-task-name" placeholder="Name">
           </div>
         </div>
-        <div class="form-group">
-          <label for="edit-task-date" class="col-sm-2 control-label">Task Due Date</label>
-          <div class="col-sm-10">
-            <input type="date" name="date" class="form-control" id="edit-task-date" placeholder="Due Date">
+      </div>
+    </div>
+
+
+
+    <!-- Edit Task form MODAL-->
+      <div class="modal fade" id="edit-task-popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="myModalLabel">Edit a Task</h4>
+            </div>
+            <div class="modal-body">
+
+            <!-- Edit a Task -->
+
+            <form class="form-horizontal" id="edit-task-form">
+              <input type='hidden' name="task-eventId" id="edit-task-eventId">
+              <input type='hidden' name="taskId" id="taskId">
+              <div class="form-group">
+                <label for="edit-task-name" class="col-sm-2 control-label">Task Description</label>
+                <div class="col-sm-10">
+                  <input type="text" name="name" class="form-control" id="edit-task-name" placeholder="Name">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="edit-task-date" class="col-sm-2 control-label">Task Due Date</label>
+                <div class="col-sm-10">
+                  <input type="date" name="date" class="form-control" id="edit-task-date" placeholder="Due Date">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="submit" class="btn btn-default" id="edit-task">Update Task</button>
+                </div>
+              </div>
+            </form>
+
           </div>
         </div>
-        <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default" id="edit-task">Update Task</button>
-          </div>
-        </div>
-      </form>
+      </div>
+    </div>
+
+
 
       <!-- Calendar View -->
-      <h2 id="task-calendar-label">Task Calendar</h2>
+    <div id="calendar-view">
+      <h2 class="task-calendar-label"></h2>
       <div id='calendar'></div>
 
     </div> <!-- jumbotron -->

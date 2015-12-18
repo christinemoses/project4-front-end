@@ -104,41 +104,34 @@ body {
 }
 
 #new-event-form {
-  display: none;
+  display: inline;
 }
 
 #edit-event-form {
-  display: none;
+  display: inline;
 }
 
 #update-event {
-  display: none;
+  display: inline;
 }
 
 #task-view {
   display: none;
 }
 
-#task-add-button {
-  display: none;
-}
-
 #new-task-form {
-  display: none;
+  display: inline;
 }
 
 #edit-task-form{
-  display: none;
+  display: inline;
 }
 
 #edit-task{
-  display: none;
+  display: inline;
 }
 
 #task-calendar-label{
   display: none;
 }
 
-#calendar{
-  display: none;
-}

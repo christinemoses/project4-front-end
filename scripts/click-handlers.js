@@ -31,6 +31,7 @@ $(function() {
       taskTracker_api.login(credentials, loginCallback);
       $('#reg-popup').modal('hide');
       $('.modal-backdrop').remove();
+      $('#event-view').show();
     });
     e.preventDefault(); // prevents page from reloading
 
@@ -68,6 +69,12 @@ $(function() {
           return;
         }
       console.log("logged out");
+    $('#landing-page-elements').show();
+    $("#task-view").hide();
+    $('#event-view').hide();
+    $('#calendar-view').hide();
+    $('#show-event-list').hide();
+    $tr.remove();
     });
     e.preventDefault();
   });
@@ -78,6 +85,8 @@ $(function() {
       var event = wrap('event', form2object(this));
       $('input:text').val('');
       $('#new-event-start').val('');
+      $('#new-event-popup').modal('hide');
+      $('.modal-backdrop').remove();
       taskTracker_api.createEvent(event, function(err, data){
         if (err) {
           alert("Error creating event");
@@ -85,7 +94,7 @@ $(function() {
         }
         console.log(data);
         $('#event-list tr:last').after(
-          '<tr data-id=' + data.event.id + '><td class="event-name">' + data.event.name +  '</td><td class="event-location">' + data.event.location + '</td><td class="event-date">' + data.event.date + '</td><td><button class="edit btn btn-primary">Edit</button></td><td><button class="delete btn btn-danger">Delete</button></td><td><button class="event-tasks btn btn-info">Event Tasks</button></td></tr>');
+          '<tr data-id=' + data.event.id + '><td class="event-name">' + data.event.name +  '</td><td class="event-location">' + data.event.location + '</td><td class="event-date">' + data.event.date + '</td><td><button data-toggle="modal" data-target="#edit-event-popup" class="edit btn btn-default">Edit</button></td><td><button class="delete btn btn-xs btn-danger">X</button></td><td><button class="event-tasks btn btn-default">Event Tasks</button></td></tr>');
       });
   });
 
@@ -95,7 +104,7 @@ $(function() {
     var $target = $(e.target);
     var $tr = $target.closest("tr");
     var id = $tr.data('id');
-    var eventName = $tr.find('.event-name').text()
+    var eventName = $tr.find('.event-name').text();
     if($target.hasClass("delete")){
         console.log("deleting ", id);
         $tr.remove();
@@ -110,9 +119,24 @@ $(function() {
     }else if($target.hasClass("event-tasks")) {
         $('.task-detail').remove();
         $("#task-view").show();
+        $('#event-view').hide();
+        $('#show-event-list').css('display', 'inline');
         $('#add-task-eventId').val(id);
         $('.task-list-label').text(eventName + " Tasks");
+        $('.task-calendar-label').text(eventName + " Task Calendar")
+        $('#calendar').fullCalendar('removeEvents', [taskId]);
+        // calendar functionality & features
+        $('#calendar').fullCalendar({
+          header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month, agendaWeek, agendaDay'
+          },
+          defaultView: 'month',
+          editable: true
+        });
         taskTracker_api.listTasks(id, taskListCallback);
+        $('#calendar-view').show();
     }
   });
 
@@ -125,15 +149,20 @@ $(function() {
     var eventArray = data.events;
     eventArray.forEach(function(event, _index, _arr){
       $('#event-list tr:last').after(
-          '<tr data-id=' + event.id + '><td class="event-name">' + event.name +  '</td><td class="event-location">' + event.location + '</td><td class="event-date">' + event.date + '</td><td><button class="edit btn btn-primary">Edit</button></td><td><button class="delete btn btn-danger">Delete</button></td><td><button class="event-tasks btn btn-info">Event Tasks</button></td></tr>');
+          '<tr data-id=' + event.id + '><td class="event-name">' + event.name +  '</td><td class="event-location">' + event.location + '</td><td class="event-date">' + event.date + '</td><td><button data-toggle="modal" data-target="#edit-event-popup" class="edit btn btn-default">Edit</button></td><td><button class="delete btn btn-xs btn-danger">X</button></td><td><button class="event-tasks btn btn-default">Event Tasks</button></td></tr>');
 
     });
   };
 
-  // $('#show-event-list').one('click', function(e){
-  //   e.preventDefault();
-  //   taskTracker_api.listEvents(eventListCallback);
-  // });
+  $('#show-event-list').on('click', function(e){
+    e.preventDefault();
+    // taskTracker_api.listEvents(eventListCallback);
+    $('#event-view').show();
+    $('#calendar-view').hide();
+    $("#task-view").hide();
+    $('#show-event-list').hide();
+    $('#calendar').fullCalendar('removeEvents', [taskId]);
+  });
 
 
   var taskListCallback = function(err, data) {
@@ -150,7 +179,7 @@ $(function() {
   var addTask = function(task) {
     // pushing task to table
     $('#task-list tr:last').after(
-      '<tr class="task-detail" data-id=' + task.id + '><td class="task-name">' + task.name + '</td><td class="task-date">' + task.date + '</td><td><button class="edit btn btn-primary">Edit</button></td><td><button class="delete btn btn-danger">Delete</button></td></tr>');
+      '<tr class="task-detail" data-id=' + task.id + '><td class="task-name">' + task.name + '</td><td class="task-date">' + task.date + '</td><td><button data-toggle="modal" data-target="#edit-task-popup" class="edit btn btn-default">Edit</button></td><td><button class="delete btn btn-xs btn-danger">X</button></td></tr>');
 
     // adding task to calendar
     $('#calendar').fullCalendar('addEventSource', [
@@ -170,6 +199,8 @@ $(function() {
     var event = wrap('event', form2object(this));
     $('input:text').val('');
     $('#edit-event-start').val('');
+    $('#edit-event-popup').modal('hide');
+    $('.modal-backdrop').remove();
     var id = $('#eventId').val();
     taskTracker_api.updateEvent(id, event, function(err, data){
       if (err) {
@@ -177,7 +208,7 @@ $(function() {
       }
       console.log('event updated');
       $('#event-list tr:last').after(
-        '<tr data-id=' + data.event.id + '><td class="event-name">' + data.event.name +  '</td><td class="event-location">' + data.event.location + '</td><td class="event-date">' + data.event.date + '</td><td><button class="edit btn btn-primary">Edit</button></td><td><button class="delete btn btn-danger">Delete</button></td><td><button class="tasks btn btn-info">Event Tasks</button></td></tr>');
+        '<tr data-id=' + data.event.id + '><td class="event-name">' + data.event.name +  '</td><td class="event-location">' + data.event.location + '</td><td class="event-date">' + data.event.date + '</td><td><button data-toggle="modal" data-target="#edit-event-popup" class="edit btn btn-default">Edit</button></td><td><button class="delete btn btn-xs btn-danger">X</button></td><td><button class="tasks btn btn-default">Event Tasks</button></td></tr>');
     });
   });
 
@@ -186,6 +217,8 @@ $(function() {
     e.preventDefault();
     var task = wrap('task', form2object(this));
     var eventId = $('#add-task-eventId').val();
+    $('#add-task-popup').modal('hide');
+    $('.modal-backdrop').remove();
     $('input:text').val('');
     $('#task-date').val('');
     taskTracker_api.createTask(eventId, task, function(err, data){
@@ -228,6 +261,10 @@ $(function() {
     var taskId = $('#taskId').val();
     $('input:text').val('');
     $('#edit-task-date').val('');
+    $('#edit-task-popup').modal('hide');
+    $('.modal-backdrop').remove();
+    $('#calendar').fullCalendar('removeEvents', [taskId]);
+
     taskTracker_api.updateTask(eventId, taskId, task, function(err, data){
       if (err) {
         alert("There was an error updating the task")
@@ -238,16 +275,6 @@ $(function() {
   });
 
 
-  // calendar functionality & features
-  $('#calendar').fullCalendar({
-    header: {
-      left: 'prev,next today',
-      center: 'title',
-      right: 'month, agendaWeek, agendaDay'
-    },
-    defaultView: 'month',
-    editable: true
-  });
 
 
 });
